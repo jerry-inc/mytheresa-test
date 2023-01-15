@@ -11,7 +11,7 @@ const Header = () => {
 		openWishList();
 	};
 	return (
-		<div className="header">
+		<div className="header" data-testid={'header'}>
 			<div className="nav-bar">
 				<img
 					className="logo"

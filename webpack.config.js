@@ -1,9 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
 	entry: path.resolve(__dirname, './src/main.js'),
-	mode: 'development',
+	mode: 'production',
 	output: {
 		path: path.resolve(__dirname, './dist'),
 		filename: 'index_bundle.js',
@@ -33,18 +34,11 @@ module.exports = {
 			},
 			{
 				test: /\.s[ac]ss$/i,
-				use: [
-					// Creates `style` nodes from JS strings
-					'style-loader',
-					// Translates CSS into CommonJS
-					'css-loader',
-					// Compiles Sass to CSS
-					'sass-loader',
-				],
+				use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
 			},
 			{
 				test: /\.css$/,
-				use: ['style-loader', 'css-loader'],
+				use: [MiniCssExtractPlugin.loader, 'css-loader'],
 			},
 		],
 	},
@@ -52,5 +46,10 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: path.join(__dirname, 'public', 'index.html'),
 		}),
+		new MiniCssExtractPlugin(),
 	],
+	performance: {
+		maxEntrypointSize: 512000,
+		maxAssetSize: 512000,
+	},
 };

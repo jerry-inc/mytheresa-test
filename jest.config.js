@@ -1,10 +1,10 @@
 module.exports = {
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: ["src/**/*.{js,jsx}"],
   coverageDirectory: "coverage",
   testEnvironment: "jsdom",
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   moduleNameMapper: {
-    "^.+\\.(css|less|scss)$": "babel-jest",
+    "^.+\\.(css|less|scss|sass)$": "babel-jest",
   },
 };

@@ -8,7 +8,7 @@ export const Home = () => {
 	return (
 		<div className="content">
 			{MOVIE_TYPES.map((type, i) => (
-				<div key={`carousel-div-${i}`}>
+				<div key={`carousel-div-${i}`} data-testid="carousel">
 					<div className="carousel-title">Category: {TextNormalize(type)}</div>
 					<Carousel type={type} />
 				</div>
