@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/home/Home';
 import { About } from './pages/about/About';
 import { Detail } from './pages/detail/Detail';
-import Header from './components/Header/Header';
-import { WishProvider } from './context/wishContext';
+import Header from './components/header/Header';
+import { WishProvider } from './context/WishContext';
 
 const App = () => {
-	// useEffect(() => {
-	// 	localStorage.removeItem('wishlist');
-	// }, []);
 	return (
 		<>
 			<WishProvider>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import WishButton from '../wishButton/WishButton';
-import { useWish } from '../../context/wishContext';
+import { useWish } from '../../context/WishContext';
 import './header.sass';
 
 const Header = () => {

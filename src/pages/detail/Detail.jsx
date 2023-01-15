@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { URL, API_KEY, IMG_BASE_URL } from '../../utilities/constants';
 import './details.sass';
-import { useWish } from '../../context/wishContext';
+import { useWish } from '../../context/WishContext';
 
 export const Detail = () => {
 	const { theme, id } = useParams();

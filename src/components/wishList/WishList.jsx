@@ -1,7 +1,7 @@
 import React from 'react';
 import './wishlist.sass';
 import Modal from '../modal/Modal';
-import { useWish } from '../../context/wishContext';
+import { useWish } from '../../context/WishContext';
 
 export const WishList = ({ isOpen, wishList }) => {
 	const { closeWishList, removeFromWishList } = useWish();
