@@ -7,7 +7,7 @@ import { useWish } from '../../context/WishContext';
 export const Detail = () => {
 	const { theme, id } = useParams();
 
-	const { addToWishList } = useWish();
+	const { addToWishList, checkIfAlreadyOnList } = useWish();
 
 	const [detail, setDetail] = useState(null);
 	const [loading, setLoading] = useState(true);
@@ -69,7 +69,9 @@ export const Detail = () => {
 							className={`wishlist-add-btn item-${theme}`}
 							onClick={handleWishBtnClick}
 						>
-							Add to wishlist
+							{checkIfAlreadyOnList(detail.id)
+								? 'Added to List'
+								: 'Add to wishlist'}
 						</button>
 					</section>
 					<section className={`other-info item-${theme}`}>

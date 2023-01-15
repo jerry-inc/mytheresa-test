@@ -36,6 +36,10 @@ export const WishProvider = ({ children }) => {
 		setWishList((currList) => currList.filter((item) => item.id !== id));
 	};
 
+	const checkIfAlreadyOnList = (id) => {
+		return wishList.find((item) => item.id === id);
+	};
+
 	const openWishList = () => setIsOpen(true);
 
 	const closeWishList = () => setIsOpen(false);
@@ -48,6 +52,7 @@ export const WishProvider = ({ children }) => {
 				removeFromWishList,
 				openWishList,
 				closeWishList,
+				checkIfAlreadyOnList,
 			}}
 		>
 			{children}
