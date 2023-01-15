@@ -10,7 +10,7 @@ const App = () => {
 	return (
 		<>
 			<WishProvider>
-				<BrowserRouter>
+				<BrowserRouter basename="/">
 					<Header />
 					<div className="main-container" data-testid={'content'}>
 						<Routes>
