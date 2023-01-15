@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import { URL, API_KEY, IMG_BASE_URL } from '../../utilities/constants';
 import { Link } from 'react-router-dom';
+import './carousel.sass';
 
 export const CarouselBox = ({ type }) => {
 	const [movies, setMovies] = useState([]);
@@ -27,18 +28,10 @@ export const CarouselBox = ({ type }) => {
 	};
 
 	return (
-		<div>
-			{loading && (
-				<div style={{ height: 300, width: 500, backgroundColor: '#ccc' }}>
-					Loading ...
-				</div>
-			)}
+		<div className="carousel-container">
+			{loading && <div className="carousel-loading">Loading ...</div>}
 
-			{error && (
-				<div style={{ height: 300, width: 500, backgroundColor: '#ccc' }}>
-					{error}
-				</div>
-			)}
+			{error && <div className="carousel-error">{error}</div>}
 
 			{!loading && !error && (
 				<Carousel showThumbs={false} width={500}>
@@ -49,7 +42,6 @@ export const CarouselBox = ({ type }) => {
 									style={{ width: 500, objectFit: 'contain' }}
 									src={`${IMG_BASE_URL}/w500/${movie.backdrop_path}`}
 								/>
-
 								<Link className="legend" to={`/detail/${type}/${movie.id}`}>
 									{movie.original_title}
 								</Link>

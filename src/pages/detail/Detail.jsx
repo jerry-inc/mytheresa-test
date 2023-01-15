@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { URL, API_KEY } from '../../utilities/constants';
+import { URL, API_KEY, IMG_BASE_URL } from '../../utilities/constants';
 import './details.sass';
 import { useWish } from '../../context/wishContext';
 
@@ -9,7 +9,7 @@ export const Detail = () => {
 
 	const { addToWishList } = useWish();
 
-	const [moveDetail, setMovieDetail] = useState(null);
+	const [detail, setDetail] = useState(null);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -25,7 +25,7 @@ export const Detail = () => {
 			setLoading(true);
 			let res = await fetch(`${URL}/movie/${id}?api_key=${API_KEY}`);
 			res = await res.json();
-			setMovieDetail(res);
+			setDetail(res);
 			setLoading(false);
 		} catch (error) {
 			console.log(error.message);
@@ -33,49 +33,55 @@ export const Detail = () => {
 		}
 	};
 
+	const handleWishBtnClick = () => {
+		const data = {
+			id: detail.id,
+			name: detail.original_title,
+			img: `${IMG_BASE_URL}/w92/${detail.poster_path}`,
+		};
+		addToWishList(data);
+	};
+
 	return (
-		<div>
-			{moveDetail && (
-				<div className="movieWrapper">
-					<section className="imageMovie ">
-						<figure className="addWishlist">
+		<div className="content">
+			{!loading && detail && (
+				<div className="detailContainer">
+					<section className="image-section ">
+						<div className="poster">
 							<img
-								style={{ width: '50vw' }}
-								src={`http://image.tmdb.org/t/p/original${moveDetail.backdrop_path}`}
+								className="poster-image"
+								src={`${IMG_BASE_URL}/original${detail.backdrop_path}`}
 							/>
-							<figcaption>
-								<h2>Add to my Wishlist</h2>
-								<a href="#" onClick={() => addToWishList(moveDetail.id)}></a>
-							</figcaption>
-						</figure>
-						<a href="#" onClick={() => addToWishList(moveDetail.id)}>
-							Add to my wishlist
-						</a>
+						</div>
 					</section>
-					<section className={`descriptionMovie movie-${theme}`}>
-						<ul>
-							<li>
-								<h3>{moveDetail.original_title}</h3>
-							</li>
-							<li>{moveDetail.overview}</li>
-							<li>{moveDetail.popularity}</li>
-							<li className="tagsMovie">{moveDetail.genres[0].name}</li>
-						</ul>
+					<section className={`description-section item-${theme}`}>
+						<div className={`item-title item-${theme}`}>
+							{detail.original_title}
+						</div>
+						<div className={`item-description item-${theme}`}>
+							{detail.overview}
+						</div>
+						<div className="item-genre">
+							{detail.genres.map((item) => item.name).join(', ')}
+						</div>
+						<button
+							type="button"
+							className={`wishlist-add-btn item-${theme}`}
+							onClick={handleWishBtnClick}
+						>
+							Add to wishlist
+						</button>
 					</section>
-					<section className={`infoMovie movie-${theme}`}>
-						<ul>
-							<li>
-								Production company: {moveDetail.production_companies[0].name}
-							</li>
-							<li>
-								<p>
-									Country: {moveDetail.production_companies[0].origin_country}
-								</p>
-							</li>
-							<li>
-								<a href={moveDetail.homepage}>Movie's original link</a>
-							</li>
-						</ul>
+					<section className={`other-info item-${theme}`}>
+						<div className="info-box">
+							<div>{detail.production_companies[0].name}</div>
+							<div>
+								Country: {detail.production_companies[0].origin_country}
+							</div>
+							<div>
+								<a href={detail.homepage}>Movie Page</a>
+							</div>
+						</div>
 					</section>
 				</div>
 			)}

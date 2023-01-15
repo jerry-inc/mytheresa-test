@@ -1,0 +1,31 @@
+$wishColor: #d32752
+
+.wish-button
+  align-self: center
+  height: 2.7rem
+  width: 2.7rem
+  border-radius: 50%
+  background-color: transparent
+  border: 1px solid $wishColor
+  position: relative
+  &:hover
+    background-color: #fff
+
+  .count
+    color: #fff
+    height: 1.2rem
+    width: 1.2rem
+    border-radius: 50%
+    background-color: $wishColor
+    justify-content: center
+    align-items: center
+    display: flex
+    position: absolute
+    bottom: 0
+    right: 0
+    transform: translate(10%, 20%)
+
+  .svg-icon
+    fill: $wishColor
+    height: 1.4rem
+    width: 1.4rem

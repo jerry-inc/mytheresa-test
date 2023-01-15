@@ -10,6 +10,7 @@ module.exports = {
 		publicPath: '/',
 	},
 	target: 'web',
+	cache: false,
 	devServer: {
 		port: '5000',
 		static: {

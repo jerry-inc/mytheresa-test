@@ -2,20 +2,27 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import WishButton from '../wishButton/WishButton';
 import { useWish } from '../../context/wishContext';
-
-const wishBtnClick = () => {
-	alert('Wish Button');
-};
+import './header.sass';
 
 const Header = () => {
-	const { getTotalItems } = useWish();
+	const { getTotalItems, openWishList } = useWish();
+
+	const wishBtnClick = () => {
+		openWishList();
+	};
 	return (
-		<div className="header" style={{ display: 'flex' }}>
-			<div className="nav-bar" style={{ marginRight: 'auto' }}>
+		<div className="header">
+			<div className="nav-bar">
+				<img
+					className="logo"
+					src="https://www.mytheresa.com/skin/frontend/mytheresa/default/images/logo.png?v=20230110T111841"
+				/>
 				<NavLink to={'/'}>Home</NavLink>
 				<NavLink to={'/about'}>About</NavLink>
 			</div>
-			<WishButton onClick={wishBtnClick} count={getTotalItems()} />
+			{getTotalItems() > 0 && (
+				<WishButton onClick={wishBtnClick} count={getTotalItems()} />
+			)}
 		</div>
 	);
 };
